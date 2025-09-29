@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management Dashboard</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
+    <meta name="theme-color" content="#667eea">
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Include Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-users-cog"></i>
+                    <span>UserHub</span>
+                </a>
+                <div class="navbar-nav ml-auto">
+                    <span class="nav-item nav-link">
+                        <i class="fas fa-user-circle"></i>
+                        Admin Dashboard
+                    </span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-overlay">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">User Management Dashboard</h1>
+                    <p class="hero-subtitle">Efficiently manage your users with our modern interface</p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-users"></i>
+                            <span class="stat-number" id="totalUsers">0</span>
+                            <span class="stat-label">Total Users</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-user-plus"></i>
+                            <span class="stat-number" id="newUsers">0</span>
+                            <span class="stat-label">New This Month</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span class="stat-number">98%</span>
+                            <span class="stat-label">System Uptime</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Success, Error, Information, or Warning Messages Section -->
+            <div id="messages" class="mt-3"></div>
+
+            <!-- Action Bar -->
+            <div class="action-bar">
+                <div class="action-left">
+                    <h2 class="section-title">
+                        <i class="fas fa-table"></i>
+                        User Directory
+                    </h2>
+                </div>
+                <div class="action-right">
+                    <button id="addUserButton" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Add New User
+                    </button>
+                </div>
+            </div>
+
+            <!-- Users Table -->
+            <div class="table-container">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-hashtag"></i> ID</th>
+                            <th><i class="fas fa-user"></i> Name</th>
+                            <th><i class="fas fa-envelope"></i> Email</th>
+                            <th><i class="fas fa-birthday-cake"></i> Age</th>
+                            <th><i class="fas fa-map-marker-alt"></i> Address</th>
+                            <th><i class="fas fa-cogs"></i> Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-brand">
+                        <i class="fas fa-users-cog"></i>
+                        <span>UserHub</span>
+                    </div>
+                    <p class="footer-description">
+                        Modern user management solution for the digital age.
+                    </p>
+                </div>
+                <div class="footer-right">
+                    <div class="footer-links">
+                        <div class="footer-section">
+                            <h4>Product</h4>
+                            <ul>
+                                <li><a href="#">Features</a></li>
+                                <li><a href="#">Pricing</a></li>
+                                <li><a href="#">Documentation</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-section">
+                            <h4>Support</h4>
+                            <ul>
+                                <li><a href="#">Help Center</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="#">Status</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-section">
+                            <h4>Company</h4>
+                            <ul>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Careers</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 UserHub. All rights reserved.</p>
+                </div>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Adding/Editing User -->
+    <div class="modal" id="addEditUserModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="add-edit-modal-title">
+                        <i class="fas fa-user-plus"></i>
+                        Add New User
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="modal-messages" class="mt-3"></div>
+                    <!-- User Form Fields -->
+                    <form id="userForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">
+                                        <i class="fas fa-user"></i>
+                                        Full Name
+                                    </label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter full name" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">
+                                        <i class="fas fa-envelope"></i>
+                                        Email Address
+                                    </label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="age">
+                                        <i class="fas fa-birthday-cake"></i>
+                                        Age
+                                    </label>
+                                    <input type="number" class="form-control" id="age" name="age" placeholder="Enter age" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="address">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        Address
+                                    </label>
+                                    <input type="text" class="form-control" id="address" name="address" placeholder="Enter address" required>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fas fa-times"></i>
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary" id="saveUserButton">
+                        <i class="fas fa-save"></i>
+                        Save User
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap and jQuery JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
