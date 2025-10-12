@@ -46,6 +46,33 @@ async function ensureDBConnection(req, res, next) {
   next();
 }
 
+// Health check endpoint
+app.get("/health", async (req, res) => {
+  try {
+    let dbStatus = "disconnected";
+    
+    if (dbPool) {
+      // Test database connection
+      await dbPool.query("SELECT 1");
+      dbStatus = "connected";
+    }
+    
+    res.status(200).json({
+      status: "healthy",
+      timestamp: new Date().toISOString(),
+      database: dbStatus
+    });
+  } catch (err) {
+    console.error("Health check error:", err);
+    res.status(503).json({
+      status: "unhealthy",
+      timestamp: new Date().toISOString(),
+      database: "error",
+      error: err.message
+    });
+  }
+});
+
 // GET all users
 app.get("/api/user", ensureDBConnection, async (req, res) => {
   try {
