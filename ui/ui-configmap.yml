@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-configmap
+  namespace: user-management
+data:
+  config.json: |
+    {
+      "API_URL": "http://9.235.113.110/backend/"
+    }

@@ -23,6 +23,10 @@ spec:
           envFrom:
             - secretRef:
                 name: postgres-secret
+          # مهم: نخلي PGDATA مجلد فرعي ثابت داخل مسار البيانات
+          env:
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
           volumeMounts:
             - name: data
               mountPath: /var/lib/postgresql/data
@@ -31,3 +35,4 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: postgres-pvc
+
