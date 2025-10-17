@@ -1,6 +1,4 @@
-node_modules
-
-# Ignore Terraform local files
+# Terraform local files
 .terraform/
 *.tfstate
 *.tfstate.*
@@ -8,3 +6,12 @@ crash.log
 *.zip
 *.tar.gz
 *.log
+
+# Node/React
+node_modules/
+build/
+dist/
+
+# Docker
+*.env
+*.tmp
