@@ -1,1 +1,10 @@
 node_modules
+
+# Ignore Terraform local files
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.zip
+*.tar.gz
+*.log
