@@ -15,3 +15,4 @@ dist/
 # Docker
 *.env
 *.tmp
+.terraform/
